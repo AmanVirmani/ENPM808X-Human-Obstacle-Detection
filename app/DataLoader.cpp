@@ -51,9 +51,10 @@ std::vector<cv::String> DataLoader::give_image_names(std::string dir) {
   return names;
 }
 
-void DataLoader::setupHOG() {
+bool DataLoader::setupHOG() {
   hog.cellSize = cellsize;
   hog.winSize = windowSize;
+  return true;
 }
 
 void DataLoader::get_training_data() {
