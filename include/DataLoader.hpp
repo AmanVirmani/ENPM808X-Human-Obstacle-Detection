@@ -93,7 +93,7 @@ class DataLoader {
    * @return none
    * This function sets the size of parameters used in HOG
    */
-  virtual void setupHOG();
+  virtual bool setupHOG();
 
   /**
    * @brief Function to get data for training

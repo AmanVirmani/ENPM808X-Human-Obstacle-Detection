@@ -45,12 +45,13 @@
 #include <fstream>
 #include <sys/types.h>
 
+
 /**
  * @brief class TrainSVM
  * The class TrainSVM trains SVM using data from class DataLoader and returns 
  * the trained data into a XML file
  */
-class TrainSVM {
+class TrainSVM : public DataLoader {
  public:
   /**
    * @brief Instance to store parameters needed for SVM of type
@@ -61,7 +62,7 @@ class TrainSVM {
   /**
    * @brief Instance to take data from class DataLoader
    */
-  DataLoader loadData;
+//  DataLoader loadData;
 
   /**
    * @brief constructor TrainSVM
