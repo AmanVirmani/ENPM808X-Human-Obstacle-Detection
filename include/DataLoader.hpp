@@ -93,7 +93,7 @@ class DataLoader {
    * @return none
    * This function sets the size of parameters used in HOG
    */
-  void setupHOG();
+  virtual void setupHOG();
 
   /**
    * @brief Function to get data for training
@@ -101,21 +101,21 @@ class DataLoader {
    * @return none
    * The function takes data from the directory to train SVM
    */
-  void get_training_data();
+  virtual void get_training_data();
 
   /**
    * @brief destructor DataLoader
    * @param none
    * @return none
    */
-  ~DataLoader();
+  virtual ~DataLoader();
 
   /**
    * @brief Gives images names from directory
    * @param dir of type string
    * @return container of type std::vector<cv::String>
    */
-  std::vector<cv::String> give_image_names(std::string dir);
+  virtual std::vector<cv::String> give_image_names(std::string dir);
 
   /**
    * @brief Container for positive directory with initial value as 0 for empty
