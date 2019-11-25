@@ -13,6 +13,6 @@ add_executable(
     TrainSVMTest.cpp
 )
 
-target_include_directories(detect-test PUBLIC ../vendor/googletest/googletest/include 
+target_include_directories(detect-test PUBLIC ./ ../vendor/googletest/googletest/include ../vendor/googletest/googlemock/include  
                                            ${CMAKE_SOURCE_DIR}/include ${OpenCV_INCLUDE_DIRS})
-target_link_libraries(detect-test PUBLIC gtest ${OpenCV_LIBS})
+target_link_libraries(detect-test PUBLIC gtest gmock ${OpenCV_LIBS})
