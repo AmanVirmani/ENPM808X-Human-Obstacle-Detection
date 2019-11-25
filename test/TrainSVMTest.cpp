@@ -32,10 +32,33 @@
  */
 
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <stdio.h>
 #include <TrainSVM.hpp>
 #include <opencv2/opencv.hpp>
 #include <iostream>
+
+/** 
+ * @brief Mock Class for Dataloader
+ */
+
+class MockDataLoader : public DataLoader {
+ public:
+  MOCK_METHOD0(setupHOG, void ());
+
+  MOCK_METHOD1(get_training_data, void ());
+};
+
+/** 
+ * @brief Test for Mock Class
+ * It checks if DataLoader class is successfully mocked
+ */
+
+TEST(SvmTest, MockTest) {
+    TrainSVM svm_trainer;
+    EXPECT_CALL(svm_trainer, setupHOG()).Times(1).WillOnce(Return(true));
+    EXPECT_EQ(svm_trainer.prepareData(),true);
+}
 
 /** 
  * @brief Test for SVM training
