@@ -144,3 +144,8 @@ cd docs
 cd html
 google-chrome index.html
 ```
+
+## GMock
+- Class mocked - DataLoader.hpp
+- Changed class diagrams to include virtual classes
+- Added Gmock dependency in CMake existing in vendor folder
