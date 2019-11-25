@@ -52,17 +52,17 @@ TrainSVM::TrainSVM() {
 }
 
 cv::Mat TrainSVM::prepareData() {
-  const int rows = static_cast<int>(loadData.descriptors.size());
-  const int cols = static_cast<int>(std::max(loadData.descriptors[0].cols,
-                                             loadData.descriptors[0].rows));
+  const int rows = static_cast<int>(descriptors.size());
+  const int cols = static_cast<int>(std::max(descriptors[0].cols,
+                                             descriptors[0].rows));
   /// temp is used to store data values in the format as required to train the SVM model
   cv::Mat temp(1, cols, CV_32FC1), trainData(rows, cols, CV_32FC1);
-  for (unsigned int index = 0; index < loadData.descriptors.size(); index++) {
-    if (loadData.descriptors[index].cols == 1) {
-      transpose(loadData.descriptors[index], temp);
+  for (unsigned int index = 0; index < descriptors.size(); index++) {
+    if (descriptors[index].cols == 1) {
+      transpose(descriptors[index], temp);
       temp.copyTo(trainData.row(static_cast<int>(index)));
-    } else if (loadData.descriptors[index].rows == 1) {
-      loadData.descriptors[index].copyTo(
+    } else if (descriptors[index].rows == 1) {
+      descriptors[index].copyTo(
           trainData.row(static_cast<int>(index)));
     }
   }
@@ -70,10 +70,10 @@ cv::Mat TrainSVM::prepareData() {
 }
 
 void TrainSVM::startTraining() {
-  loadData.get_training_data();
-  if (loadData.descriptors.size() > 0 && loadData.labels.size() > 0) {
+  get_training_data();
+  if (descriptors.size() > 0 && labels.size() > 0) {
     std::cout << "Starting training" << std::endl;
-    svm->train(prepareData(), cv::ml::ROW_SAMPLE, loadData.labels);
+    svm->train(prepareData(), cv::ml::ROW_SAMPLE, labels);
     std::cout << "SVM trained" << std::endl;
   } else {
     std::cout << "No data available to train SVM" << std::endl
@@ -83,7 +83,7 @@ void TrainSVM::startTraining() {
 }
 
 void TrainSVM::saveSVM(std::string filename) {
-  if (loadData.descriptors.size() > 0 && loadData.labels.size() > 0) {
+  if (descriptors.size() > 0 && labels.size() > 0) {
     std::cout << "Saving trained SVM classifier" << std::endl;
     svm->save(filename);
     std::cout << "SVM classifier saved successfully" << std::endl;
@@ -99,7 +99,7 @@ bool TrainSVM::directoryExist(const std::string& pathname) {
 
 void TrainSVM::setPosDirectory(std::string dir) {
   if (directoryExist(dir)) {
-    loadData.pos_dir = dir;
+    pos_dir = dir;
   } else {
     std::cout << "Positive data directory does not exists" << std::endl;
   }
@@ -107,7 +107,7 @@ void TrainSVM::setPosDirectory(std::string dir) {
 
 void TrainSVM::setNegDirectory(std::string dir) {
   if (directoryExist(dir)) {
-    loadData.neg_dir = dir;
+    neg_dir = dir;
   } else {
     std::cout << "Negative data directory does not exists" << std::endl;
   }
