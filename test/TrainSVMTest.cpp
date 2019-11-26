@@ -44,7 +44,7 @@
 
 class MockDataLoader : public DataLoader {
  public:
-  MOCK_METHOD0(setupHOG, void ());
+  MOCK_METHOD0(setupHOG, bool ());
 
   MOCK_METHOD1(get_training_data, void ());
 };
